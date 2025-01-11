@@ -4,6 +4,7 @@ Vault can be used as a PKI provider to manage SSL/TLS certificates.
 Vault Agent can be configured to automatically request/renew the certificate and then restart Kafka, so the certificates remain valid.
 
 This example builds on work done by [jeqo](https://github.com/jeqo)
+
 The goal is to extend the original [example](https://github.com/jeqo/docker-composes/tree/main/cp-vault-pki) and introduce the user to Vault Agent to manage the renewal of the certificates.
 
 ## How to run
