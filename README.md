@@ -28,13 +28,13 @@ Once it's finished, generate a kafka-client Vault token to create certificates a
 ```shell
 make client_token
 vault token create -field=token -role kafka-client
-s.wwHX4582ZwULW4nDBfVWD31m
+hvs.exampleToken
 ```
 
 and
 
 ```shell
-make VAULT_TOKEN=s.wwHX4582ZwULW4nDBfVWD31m producer_keystore consumer_keystore
+make VAULT_TOKEN=hvs.exampleToken producer_keystore consumer_keystore
 ```
 
 Finally, start producer and consumer:

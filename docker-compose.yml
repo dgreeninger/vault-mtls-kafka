@@ -1,7 +1,7 @@
 ---
 services:
   vault:
-    image: vault:1.9.3
+    image: vault:1.18.3
     ports:
       - "8200:8200"
     cap_add:
@@ -74,7 +74,7 @@ services:
       - ./pki:/etc/kafka/secrets
 
   kafka-client:
-    image: confluentinc/cp-kafka:${CP_VERSION}
+    image: confluentinc/cp-kafka
     entrypoint: /bin/bash
     tty: true
     volumes:
