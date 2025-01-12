@@ -20,22 +20,9 @@ This will:
 - Clean PKI dir,
 - Start Vault
 - Create PKI and roles
-- Create Certificates and KeyStores
+- Use Vault Agent to create Certificates and KeyStores
 - Start Kafka and create a topic
 
-Once it's finished, generate a kafka-client Vault token to create certificates and keystore for (console) Producer and Consumer:
-
-```shell
-make client_token
-vault token create -field=token -role kafka-client
-hvs.exampleToken
-```
-
-and
-
-```shell
-make VAULT_TOKEN=hvs.exampleToken producer_keystore consumer_keystore
-```
 
 Finally, start producer and consumer:
 

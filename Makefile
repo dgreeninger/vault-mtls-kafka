@@ -139,6 +139,4 @@ vault_pki_and_keys: vault_up wait_5 root_ca intermediate_ca pki_roles token_role
 
 agent_kafka_and_topics: vault_agent wait_5 wait_5 wait_5 kafka_topic
 
-
-
-prep: clean vault_pki_and_keys vault_agent kafka_and_topics
+prep: clean vault_pki_and_keys agent_kafka_and_topics
