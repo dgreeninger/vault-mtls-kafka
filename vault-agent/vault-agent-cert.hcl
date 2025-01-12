@@ -18,7 +18,7 @@ template {
   source = "vault-agent/kafka-servers.tpl"
   destination = "pki/kafka-broker-1.pem"
   perms = 0600
-  command = "kafka-service.sh
+  command = "kafka-service.sh"
 
 }
 
