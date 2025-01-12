@@ -12,6 +12,7 @@ clean:
 	rm -rf ./pki
 	mkdir -p ./pki
 
+
 root_ca:
 	echo "Configuring Root CA @ ${VAULT_ADDR}"
 	vault secrets enable -path root-ca pki
@@ -71,6 +72,7 @@ truststore:
 
 broker_keystore:
 	echo "---> Configuring Kafka broker"
+	#rm ./pki/kafka-broker-1.pem ./pki/kafka-broker-1.p12 ./pki/kafka-broker-1-keystore.jks
 	vault write -field certificate kafka-int-ca/issue/kafka-server \
 		common_name=broker-1.servers.kafka.acme.com alt_names=localhost \
 		format=pem_bundle > ./pki/kafka-broker-1.pem
@@ -126,11 +128,14 @@ kafka_up:
 wait_5:
 	sleep 5
 
-vault_pki_and_keys: vault_up wait_5 root_ca intermediate_ca pki_roles token_roles truststore broker_keystore
+vault_agent:
+	echo "${DEFAULT_PASSWORD}" > ./pki/kafka_broker_1_keystore_credential
+	vault agent -config=vault-agent/vault-agent-cert.hcl
+
+vault_pki_and_keys: vault_up wait_5 root_ca intermediate_ca pki_roles token_roles truststore
 
 kafka_and_topics: kafka_up wait_5 wait_5 wait_5 kafka_topic
 
-vault_agent:
-	vault agent -config=vault-agent/vault-agent-cert.hcl
 
-prep: clean vault_pki_and_keys kafka_and_topics
+
+prep: clean vault_pki_and_keys vault_agent kafka_and_topics
