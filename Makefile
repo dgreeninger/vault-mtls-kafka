@@ -118,6 +118,7 @@ producer_run:
 destroy:
 	docker-compose down --remove-orphans
 	make clean
+	kill -9 $$(cat /tmp/vault-agent-pidfile)
 
 vault_up:
 	docker-compose up -d vault
@@ -129,12 +130,13 @@ wait_5:
 	sleep 5
 
 vault_agent:
-	echo "${DEFAULT_PASSWORD}" > ./pki/kafka_broker_1_keystore_credential
-	vault agent -config=vault-agent/vault-agent-cert.hcl
+	vault agent -config=vault-agent/vault-agent-cert.hcl > vault-agent-kafka.log 2>&1 &
+kill_agent:
+	kill -9 $$(cat /tmp/vault-agent-pidfile)
 
 vault_pki_and_keys: vault_up wait_5 root_ca intermediate_ca pki_roles token_roles truststore
 
-kafka_and_topics: kafka_up wait_5 wait_5 wait_5 kafka_topic
+agent_kafka_and_topics: vault_agent wait_5 wait_5 wait_5 kafka_topic
 
 
 
