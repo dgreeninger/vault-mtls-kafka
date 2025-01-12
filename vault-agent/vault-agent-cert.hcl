@@ -19,7 +19,6 @@ template {
   destination = "pki/kafka-broker-1.pem"
   perms = 0600
   command = "vault-agent/kafka-service.sh"
-
 }
 
 template {
