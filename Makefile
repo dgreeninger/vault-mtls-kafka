@@ -130,4 +130,7 @@ vault_pki_and_keys: vault_up wait_5 root_ca intermediate_ca pki_roles token_role
 
 kafka_and_topics: kafka_up wait_5 wait_5 wait_5 kafka_topic
 
+vault_agent:
+	vault agent -config=vault-agent/vault-agent-cert.hcl
+
 prep: clean vault_pki_and_keys kafka_and_topics
