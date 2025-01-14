@@ -48,7 +48,7 @@ Pre-conditions:
       ## Here is where CRL validation for revoked certificates is enabled.
       KAFKA_OPTS: "-Dcom.sun.security.enableCRLDP=true -Dcom.sun.net.ssl.checkRevocation=true"
 ```
-Source: [docker-compose](docker-compose.yml) Kafka environment definition.
+Source: [docker-compose](https://github.com/dgreeninger/vault-mtls-kafka/blob/main/docker-compose.yml#L70) Kafka environment definition.
 
 - producer and consumer are writing and reading data properly.
 
